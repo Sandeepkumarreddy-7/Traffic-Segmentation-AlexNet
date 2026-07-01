@@ -1,33 +1,27 @@
+# Virtual Environment
 venv/
+
+# Dataset
+dataset/
+
+# Python
 __pycache__/
 *.pyc
 
-outputs/
-runs/
-
-.ipynb_checkpoints/
-
+# Model Weights
 *.pth
 *.pt
 
-.DS_Store
-
-.idea/
-
-.vscode/settings.jsonvenv/
-__pycache__/
-*.pyc
-
+# Output folders
 outputs/
 runs/
 
+# Jupyter
 .ipynb_checkpoints/
 
-*.pth
-*.pt
-
-.DS_Store
-
+# IDE
+.vscode/
 .idea/
 
-.vscode/settings.json
+# OS Files
+.DS_Store
