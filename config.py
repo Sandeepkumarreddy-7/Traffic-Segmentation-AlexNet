@@ -16,7 +16,7 @@ VAL_MASK_DIR = "dataset/labels/val"
 
 BATCH_SIZE = 4
 
-NUM_EPOCHS = 1
+NUM_EPOCHS = 20
 
 LEARNING_RATE = 0.001
 

@@ -1,3 +1,5 @@
+import os
+import json
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -53,6 +55,7 @@ def train():
     # Training
     # ==========================================
     print("\nTraining Started...\n")
+    loss_history = []
 
     for epoch in range(NUM_EPOCHS):
 
@@ -91,6 +94,7 @@ def train():
                     )
 
         epoch_loss = running_loss / len(train_loader)
+        loss_history.append(epoch_loss)     
 
         print(
             f"Epoch [{epoch + 1}/{NUM_EPOCHS}] "
@@ -101,6 +105,10 @@ def train():
     # Save Model
     # ==========================================
     save_model(model, MODEL_PATH)
+    os.makedirs("outputs", exist_ok=True)
+
+    with open("outputs/loss_history.json", "w") as f:
+            json.dump(loss_history, f)
 
     print("\n===================================")
     print(" Training Completed Successfully ")

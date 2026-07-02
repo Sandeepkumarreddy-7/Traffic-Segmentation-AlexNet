@@ -118,6 +118,14 @@ def test():
     plt.axis("off")
 
     plt.tight_layout()
+    
+    os.makedirs("outputs/predictions", exist_ok=True)
+
+    plt.savefig(
+        "outputs/predictions/prediction_result.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
     plt.show()
 
 
