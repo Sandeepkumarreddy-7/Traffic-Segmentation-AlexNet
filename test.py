@@ -11,6 +11,7 @@ from config import *
 from models.segmentation_model import SegmentationModel
 from utils import load_model
 from visualize import colorize_mask
+import random
 
 
 def test():
@@ -35,8 +36,9 @@ def test():
     # ============================
     image_dir = VAL_IMAGE_DIR
 
-    image_name = sorted(os.listdir(image_dir))[0]
+    
 
+    image_name = random.choice(os.listdir(image_dir))
     image_path = os.path.join(image_dir, image_name)
 
     print("Testing:", image_name)
