@@ -18,4 +18,4 @@ To perform pixel-wise semantic segmentation of traffic scenes while preserving s
 - Gradio
 
 Status:
-Project Initialization
+Project Initialization  

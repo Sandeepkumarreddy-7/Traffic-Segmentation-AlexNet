@@ -8,11 +8,11 @@ from models.decoder import Decoder
 
 class SegmentationModel(nn.Module):
 
-    def __init__(self, num_classes=19):
+    def __init__(self, num_classes):
         super().__init__()
 
         self.encoder = AlexNetEncoder()
-        self.decoder = Decoder()
+        self.decoder = Decoder(num_classes)
 
     def forward(self, x):
 

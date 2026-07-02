@@ -1,6 +1,10 @@
 import os
+
 from PIL import Image
+
 import torchvision.transforms.functional as TF
+from torchvision.transforms import InterpolationMode
+
 from torch.utils.data import Dataset
 
 from preprocessing.transforms import get_image_transform
@@ -25,16 +29,12 @@ class BDD100KDataset(Dataset):
 
     def __getitem__(self, index):
 
-        # Image filename
         image_name = self.image_list[index]
 
-        # Image path
         image_path = os.path.join(self.image_dir, image_name)
 
-        # Mask filename
         mask_name = image_name.replace(".jpg", "_train_id.png")
 
-        # Mask path
         mask_path = os.path.join(self.mask_dir, mask_name)
 
         # Read image
@@ -45,6 +45,13 @@ class BDD100KDataset(Dataset):
 
         # Transform image
         image = self.transform(image)
+
+        # Resize mask
+        mask = TF.resize(
+            mask,
+            size=(256, 512),
+            interpolation=InterpolationMode.NEAREST
+        )
 
         # Convert mask to tensor
         mask = TF.pil_to_tensor(mask).squeeze(0).long()

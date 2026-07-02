@@ -4,7 +4,7 @@ import torch.nn as nn
 
 class Decoder(nn.Module):
 
-    def __init__(self):
+    def __init__(self, num_classes):
         super().__init__()
 
         self.up1 = nn.ConvTranspose2d(
@@ -41,7 +41,7 @@ class Decoder(nn.Module):
 
         self.final = nn.Conv2d(
             in_channels=16,
-            out_channels=19,   # BDD100K classes
+            out_channels=num_classes,   # BDD100K classes
             kernel_size=1
         )
 
