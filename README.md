@@ -4,6 +4,8 @@
 ![Task](https://img.shields.io/badge/Task-Semantic%20Segmentation-orange)
 # 🚗 Traffic Scene Semantic Segmentation using a Custom AlexNet-based Encoder–Decoder Architecture
 
+A PyTorch implementation of semantic segmentation using a custom AlexNet-based encoder–decoder architecture trained on the BDD100K dataset.
+
 ## 📌 Project Overview
 
 This project implements a **Semantic Segmentation** model using a custom **AlexNet-based Encoder–Decoder Architecture** in PyTorch. The model is trained on the **BDD100K** dataset to perform pixel-wise classification of traffic scene images.
