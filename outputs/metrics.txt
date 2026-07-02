@@ -1,0 +1,12 @@
+Final Model Evaluation
+
+Validation Loss : 0.7282
+Pixel Accuracy  : 77.90%
+Mean IoU        : 0.2564
+
+Dataset : BDD100K
+Model : AlexNet Semantic Segmentation
+Epochs : 20
+Batch Size : 4
+Optimizer : Adam
+Loss Function : CrossEntropyLoss
