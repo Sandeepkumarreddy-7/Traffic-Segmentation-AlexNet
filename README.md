@@ -59,36 +59,13 @@ The model predicts **19 semantic classes**, including:
 
 ---
 
+
+
 # 🏗 Model Architecture
 
-The project uses a custom Encoder–Decoder architecture.
+The semantic segmentation model uses a custom AlexNet-based Encoder–Decoder architecture.
 
-```
-Input Image
-      │
-      ▼
-Image Preprocessing
-      │
-      ▼
-AlexNet Encoder
-      │
-      ▼
-Feature Maps
-      │
-      ▼
-Decoder
-      │
-      ▼
-Upsampling
-      │
-      ▼
-Segmentation Head
-      │
-      ▼
-Pixel-wise Prediction
-```
-
----
+![Architecture](assets/architecture.png)
 
 # 📂 Project Structure
 
@@ -237,10 +214,10 @@ python test.py
 
 # 📉 Plot Training Loss
 
-```bash
-python plot_loss.py
-```
 
+The following graph shows the decrease in training loss during model training.
+
+![Training Loss](outputs/plots/training_loss.png)
 ---
 
 # 🛠 Technologies Used
