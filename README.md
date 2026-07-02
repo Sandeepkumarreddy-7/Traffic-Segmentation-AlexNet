@@ -1,3 +1,7 @@
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-red)
+![Dataset](https://img.shields.io/badge/Dataset-BDD100K-green)
+![Task](https://img.shields.io/badge/Task-Semantic%20Segmentation-orange)
 # 🚗 Traffic Scene Semantic Segmentation using a Custom AlexNet-based Encoder–Decoder Architecture
 
 ## 📌 Project Overview
