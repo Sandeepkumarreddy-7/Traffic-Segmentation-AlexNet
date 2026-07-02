@@ -128,6 +128,11 @@ def test():
         dpi=300,
         bbox_inches="tight"
     )
+    plt.savefig(
+    "outputs/predictions/prediction4.png",
+    dpi=300,
+    bbox_inches="tight"
+    )
     plt.show()
 
 
