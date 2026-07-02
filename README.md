@@ -128,7 +128,7 @@ Traffic-Segmentation-AlexNet/
 
 # 🖼 Sample Prediction
 
-
+### Example 1
 ![Prediction 1](outputs/predictions/prediction1.png)
 
 ### Example 2
