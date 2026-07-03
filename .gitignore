@@ -4,6 +4,9 @@ venv/
 # Dataset
 dataset/
 
+deploy/
+
+
 # Python
 __pycache__/
 *.pyc

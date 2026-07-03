@@ -1,45 +1,54 @@
-import torch
-import numpy as np
-from PIL import Image
-import torchvision.transforms as transforms
 import gradio as gr
+import torch
+import torchvision.transforms as transforms
+from PIL import Image
+import numpy as np
 
 from config import *
 from models.segmentation_model import SegmentationModel
-from visualize import colorize_mask
 from utils import load_model
+from visualize import colorize_mask
 
 
-# ==========================================
+# =====================================================
 # Device
-# ==========================================
+# =====================================================
+
 device = DEVICE
 
-# ==========================================
-# Load Model
-# ==========================================
-model = SegmentationModel(num_classes=NUM_CLASSES).to(device)
+
+# =====================================================
+# Load Trained Model
+# =====================================================
+
+model = SegmentationModel(num_classes=NUM_CLASSES)
+model = model.to(device)
 
 model = load_model(
-    model,
-    MODEL_PATH,
-    device
+    model=model,
+    path=MODEL_PATH,
+    device=device
 )
 
 model.eval()
 
-# ==========================================
+
+# =====================================================
 # Image Transform
-# ==========================================
+# =====================================================
+
 transform = transforms.Compose([
     transforms.Resize((256, 512)),
     transforms.ToTensor()
 ])
-
-# ==========================================
+# =====================================================
 # Prediction Function
-# ==========================================
+# =====================================================
+
 def predict(image):
+
+    if image is None:
+        return None, None, "Please upload an image."
 
     original = image.copy()
 
@@ -47,41 +56,134 @@ def predict(image):
     image = image.unsqueeze(0).to(device)
 
     with torch.no_grad():
-
         output = model(image)
-
         prediction = torch.argmax(output, dim=1)
 
     prediction = prediction.squeeze(0).cpu().numpy()
 
-    color_prediction = colorize_mask(prediction)
+    color_mask = colorize_mask(prediction)
+    color_mask = Image.fromarray(color_mask)
 
-    color_prediction = Image.fromarray(color_prediction)
+    status = "✅ Segmentation Completed Successfully"
 
-    return original, color_prediction
+    return original, color_mask, status
+# =====================================================
+# Professional Gradio UI
+# =====================================================
 
+with gr.Blocks(
+    title="Traffic Scene Semantic Segmentation",
+    theme=gr.themes.Soft()
+) as demo:
 
-# ==========================================
-# Gradio Interface
-# ==========================================
-demo = gr.Interface(
-    fn=predict,
+    gr.Markdown(
+        """
+# 🚗 Traffic Scene Semantic Segmentation
 
-    inputs=gr.Image(type="pil", label="Upload Traffic Image"),
+### Custom AlexNet-based Encoder–Decoder Architecture
 
-    outputs=[
-        gr.Image(label="Original Image"),
-        gr.Image(label="Predicted Segmentation")
-    ],
+Semantic segmentation of traffic scenes using **PyTorch** and the **BDD100K** dataset.
 
-    title="🚗 Traffic Scene Semantic Segmentation",
-
-    description="""
-Upload a traffic scene image.
-
-The model predicts semantic segmentation using a
-Custom AlexNet Encoder-Decoder Architecture trained on BDD100K.
+Upload a traffic scene image and click **Predict Segmentation**.
 """
-)
+    )
 
-demo.launch()
+    with gr.Row():
+
+        input_image = gr.Image(
+            type="pil",
+            label="📤 Upload Traffic Image"
+        )
+
+        output_image = gr.Image(
+            label="🎯 Predicted Segmentation"
+        )
+
+    status = gr.Textbox(
+        label="Status",
+        interactive=False
+    )
+
+    predict_button = gr.Button(
+        "🚀 Predict Segmentation",
+        variant="primary",
+        size="lg"
+    )
+
+    predict_button.click(
+        fn=predict,
+        inputs=input_image,
+        outputs=[
+            input_image,
+            output_image,
+            status
+        ]
+    )
+    gr.Markdown("---")
+
+    with gr.Row():
+
+        with gr.Column():
+
+            gr.Markdown("## 📊 Model Information")
+
+            gr.Markdown("""
+**Model:** Custom AlexNet Encoder–Decoder
+
+**Dataset:** BDD100K
+
+**Framework:** PyTorch
+
+**Semantic Classes:** 19
+
+**Device:** CPU
+""")
+
+        with gr.Column():
+
+            gr.Markdown("## 📈 Performance")
+
+            gr.Markdown("""
+✅ Validation Loss : **0.7282**
+
+✅ Pixel Accuracy : **77.90%**
+
+✅ Mean IoU : **0.2564**
+""")
+
+    gr.Markdown("---")
+
+    gr.Markdown("""
+## 📖 About
+
+This application performs **pixel-wise semantic segmentation** of traffic scene images.
+
+Each pixel is assigned to one of **19 semantic classes**, allowing the model to identify roads, vehicles, buildings, vegetation, sky, pedestrians, and other important traffic scene objects.
+
+The model is built using a **Custom AlexNet-based Encoder–Decoder Architecture** and trained on the **BDD100K** dataset.
+""")
+    gr.Markdown("---")
+
+    gr.Markdown(
+        """
+### 👨‍💻 Developed by
+
+**Dammuru Sandeep Kumar Reddy**
+
+🔗 GitHub Repository:
+
+https://github.com/Sandeepkumarreddy-7/Traffic-Segmentation-AlexNet
+
+⭐ If you like this project, consider giving it a star on GitHub!
+"""
+    )
+
+# =====================================================
+# Launch Application
+# =====================================================
+
+if __name__ == "__main__":
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=7860
+    )
