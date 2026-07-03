@@ -64,9 +64,26 @@ def predict(image):
     color_mask = colorize_mask(prediction)
     color_mask = Image.fromarray(color_mask)
 
+    overlay = create_overlay(original, color_mask)
+
     status = "✅ Segmentation Completed Successfully"
 
-    return original, color_mask, status
+    return original, overlay, color_mask, status
+def create_overlay(original, color_mask, alpha=0.50):
+    """
+    Blend original image with segmentation mask.
+    """
+
+    # Resize segmentation mask to original image size
+    color_mask = color_mask.resize(original.size)
+
+    original = np.array(original).astype(np.float32)
+    color_mask = np.array(color_mask).astype(np.float32)
+
+    overlay = (1 - alpha) * original + alpha * color_mask
+    overlay = np.clip(overlay, 0, 255).astype(np.uint8)
+
+    return Image.fromarray(overlay)
 # =====================================================
 # Professional Gradio UI
 # =====================================================
@@ -95,10 +112,14 @@ Upload a traffic scene image and click **Predict Segmentation**.
             label="📤 Upload Traffic Image"
         )
 
-        output_image = gr.Image(
-            label="🎯 Predicted Segmentation"
+        overlay_image = gr.Image(
+            label="🌈 Overlay Result"
         )
 
+        output_image = gr.Image(
+            label="🎯 Segmentation Mask"
+        )
+  
     status = gr.Textbox(
         label="Status",
         interactive=False
@@ -113,10 +134,12 @@ Upload a traffic scene image and click **Predict Segmentation**.
     predict_button.click(
         fn=predict,
         inputs=input_image,
+        
         outputs=[
             input_image,
+            overlay_image,
             output_image,
-            status
+            status  
         ]
     )
     gr.Markdown("---")
@@ -195,7 +218,7 @@ The model is built using a **Custom AlexNet-based Encoder–Decoder Architecture
         """
 ### 👨‍💻 Developed by
 
-**Dammuru Sandeep Kumar Reddy**
+**Sandeep**
 
 🔗 GitHub Repository:
 
