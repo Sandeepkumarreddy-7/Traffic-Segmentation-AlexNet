@@ -163,6 +163,33 @@ Each pixel is assigned to one of **19 semantic classes**, allowing the model to 
 The model is built using a **Custom AlexNet-based Encoder–Decoder Architecture** and trained on the **BDD100K** dataset.
 """)
     gr.Markdown("---")
+    gr.Markdown("## 🎨 Semantic Class Color Legend")
+
+    legend_html = """
+    <table style="width:100%; border-collapse: collapse;">
+        <tr><td><div style="width:20px;height:20px;background:rgb(128,64,128);display:inline-block;border:1px solid black;"></div></td><td>Road</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(244,35,232);display:inline-block;border:1px solid black;"></div></td><td>Sidewalk</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(70,70,70);display:inline-block;border:1px solid black;"></div></td><td>Building</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(102,102,156);display:inline-block;border:1px solid black;"></div></td><td>Wall</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(190,153,153);display:inline-block;border:1px solid black;"></div></td><td>Fence</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(153,153,153);display:inline-block;border:1px solid black;"></div></td><td>Pole</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(250,170,30);display:inline-block;border:1px solid black;"></div></td><td>Traffic Light</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(220,220,0);display:inline-block;border:1px solid black;"></div></td><td>Traffic Sign</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(107,142,35);display:inline-block;border:1px solid black;"></div></td><td>Vegetation</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(152,251,152);display:inline-block;border:1px solid black;"></div></td><td>Terrain</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(70,130,180);display:inline-block;border:1px solid black;"></div></td><td>Sky</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(220,20,60);display:inline-block;border:1px solid black;"></div></td><td>Person</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(255,0,0);display:inline-block;border:1px solid black;"></div></td><td>Rider</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(0,0,142);display:inline-block;border:1px solid black;"></div></td><td>Car</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(0,0,70);display:inline-block;border:1px solid black;"></div></td><td>Truck</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(0,60,100);display:inline-block;border:1px solid black;"></div></td><td>Bus</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(0,80,100);display:inline-block;border:1px solid black;"></div></td><td>Train</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(0,0,230);display:inline-block;border:1px solid black;"></div></td><td>Motorcycle</td></tr>
+        <tr><td><div style="width:20px;height:20px;background:rgb(119,11,32);display:inline-block;border:1px solid black;"></div></td><td>Bicycle</td></tr>
+    </table>
+    """
+
+    gr.HTML(legend_html)
 
     gr.Markdown(
         """
