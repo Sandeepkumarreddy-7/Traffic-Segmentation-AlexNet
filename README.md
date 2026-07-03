@@ -1,3 +1,14 @@
+---
+title: Traffic Scene Semantic Segmentation using AlexNet
+emoji: 🚗
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: "5.38.0"
+python_version: "3.10"
+app_file: app.py
+pinned: false
+---
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-red)
 ![Dataset](https://img.shields.io/badge/Dataset-BDD100K-green)
@@ -271,3 +282,8 @@ https://github.com/Sandeepkumarreddy-7
 - PyTorch
 - TorchVision
 - OpenAI ChatGPT
+## 🌐 Live Demo
+
+Try the deployed application on Hugging Face Spaces:
+
+**https://huggingface.co/spaces/Sandeep2803/traffic-segmentation-alexnet**
